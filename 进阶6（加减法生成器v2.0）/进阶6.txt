@@ -1,0 +1,172 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <conio.h>
+int add(int x,int y);
+int sub(int x,int y);
+
+
+int main()
+{
+    srand ((unsigned)time(NULL));
+    int a=rand()%10,b=rand()%10,c;
+    int count1=0,count2=0,wrong1=0,wrong2=0;
+    int choice,answer;
+    float accuracy;
+    int i,j;
+    printf("10以内加减法辅助教学程序\n");
+    printf("*****************************\n");
+    printf("*****************************\n");
+    printf("**                         **\n");
+    printf("**       1 加法练习        **\n");
+    printf("**       2 减法练习        **\n");
+    printf("**       3 程序说明        **\n");
+    printf("**       4 退出程序        **\n");
+    printf("**                         **\n");
+    printf("*****************************\n");
+    printf("*****************************\n");
+    printf("输入菜单项前的数字，选择功能，如数字超出菜单中的范围将显示0：\n");
+    scanf("%d",&choice);
+    system("cls");
+    if (choice<1||choice>4)
+    {
+        system("cls");
+        printf("选择了功能0");
+    }
+
+    else
+    {
+        switch(choice)
+        {
+        case 1:
+            for (i=1;i<=5;i++)
+            {
+                srand ((unsigned)time(NULL));
+                int a=rand()%10,b=rand()%10;
+                if(a>=b)
+                {
+                    c=a-b;
+                    a=b+c;
+                    printf("%d+%d=",b,c);
+                    scanf("%d",&answer);
+                    if (answer==add(b,c)) count1++;
+                    else
+                    {
+                        while (answer!=add(b,c))
+                        {
+                            wrong1++;
+                            while (getchar()!='\n');
+                            printf("%d+%d=",b,c);
+                            scanf("%d",&answer);
+                            if(wrong1==4)
+                            {
+                                printf("您已答错5次，此题正确答案为%d\n",add(b,c));
+                                goto flag1;
+                            }
+                        }
+                     }
+                }
+                else
+                {
+                    c=b-a;
+                    b=a+c;
+                    printf("%d+%d=",a,c);
+                    scanf("%d",&answer);
+                    if (answer==add(a,c)) count1++;
+                    else
+                    {
+                        while (answer!=add(a,c))
+                        {
+                            wrong1++;
+                            while (getchar()!='\n');
+                            printf("%d+%d=",a,c);
+                            scanf("%d",&answer);
+                            if(wrong1==4)
+                            {
+                                printf("您已答错5次，此题正确答案为%d",add(a,c));
+                                goto flag1;
+                            }
+                        }
+                     }
+                }
+            }
+            accuracy=count1/5.0*100;
+            flag1:
+            system("cls");
+            printf("答题正确率为%f%%",accuracy);
+            break;
+        case 2:
+            for (j=1;j<=5;j++)
+            {
+                srand ((unsigned)time(NULL));
+                int a=rand()%10,b=rand()%10;
+                if(a>=b)
+                {
+                    c=a-b;
+                    printf("%d-%d=",a,b);
+                    scanf("%d",&answer);
+                    if (answer==sub(a,b)) count2++;
+                    else
+                    {
+                        while (answer!=sub(a,b))
+                        {
+                            wrong2++;
+                            while (getchar()!='\n');
+                            printf("%d-%d=",a,b);
+                            scanf("%d",&answer);
+                            if(wrong2==4)
+                            {
+                                printf("您已答错5次，此题正确答案为%d\n",sub(a,b));
+                                goto flag2;
+                            }
+                        }
+                     }
+                }
+                else
+                {
+                    c=b-a;
+                    printf("%d-%d=",b,a);
+                    scanf("%d",&answer);
+                    if (answer==sub(b,a)) count2++;
+                    else
+                    {
+                        while (answer!=sub(b,a))
+                        {
+                            wrong2++;
+                            while (getchar()!='\n');
+                            printf("%d-%d=",b,a);
+                            scanf("%d",&answer);
+                            if(wrong2==4)
+                            {
+                                printf("您已答错5次，此题正确答案为%d",sub(b,a));
+                                goto flag2;
+                            }
+                        }
+                     }
+                }
+            }
+            accuracy=count2/5.0*100;
+            flag2:
+            system("cls");
+            printf("答题正确率为%f%%",accuracy);
+            break;
+        case 3:
+            printf("程序说明");
+            break;
+        case 4:
+            exit(0);
+        }
+    }
+    getch();
+}
+int add(int x,int y)
+{
+    int result;
+    result=x+y;
+    return result;
+}
+int sub(int x,int y)
+{
+    int result;
+    result=x-y;
+    return result;
+}

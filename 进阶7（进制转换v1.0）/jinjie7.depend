@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1571535640 source:d:\cproject\jinjie7\main.c
+	<stdio.h>
+	<stdlib.h>
+	<conio.h>
+

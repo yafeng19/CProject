@@ -1,0 +1,178 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#define N 10000
+/*void TypeSetting(char strText[], char strALine[], int numColumn, int textLen, int *startChar, int *endChar);
+void getALine(char strText[], int *startChar, int *endChar);
+void Output(char strALine[], int numColumn);*/
+int main()
+{
+    char strText[N] = { ' ' }, sortstr[200] = { ' ' }, strALine[200] = { ' ' }, strOutput[200] = { ' ' };
+    int numColumn, startChar = 0, endChar, textLen;
+    printf("How many columns in a line?\n");
+    scanf("%d",&numColumn);
+    getchar();
+    printf("Please input the text:\n");
+    fgets(strText,N,stdin);
+    printf("The result is:\n");
+    textLen = strlen(strText);
+    do
+    {
+        char strALine[200] = { ' ' };
+        endChar = startChar + numColumn - 1;
+        if (numColumn >= textLen)
+        {
+            strncpy(strALine,strText + startChar, endChar - startChar + 1);
+            startChar = textLen;
+            puts(strALine);
+            exit(0);
+        }
+        else
+        {
+            strncpy(strALine, strText + startChar, endChar - startChar + 1);
+            //TypeSetting(strText, strALine, numColumn, textLen, &startChar, &endChar);
+            //char strOutput[200] = { ' ' };
+            switch (strText[endChar])
+            {
+            case ',':
+            case '.':
+            case '!':
+            {
+                strncpy(strALine,strText + startChar, endChar - startChar + 1);
+                startChar = endChar + 1;
+                break;
+            }
+            case ' ':
+            {
+                strncpy(strALine, strText + startChar, endChar - startChar);
+                startChar = endChar + 1;
+                break;
+            }
+            default:
+                //getALine(strText, &(*startChar), &(*endChar));
+                //char strALine[200] = { ' ' };
+                do
+                {
+                    endChar--;
+                }
+                while (strText[endChar] == ',' && strText[endChar] == '.' && strText[endChar] == '!' && strText[endChar] == ' ');
+                if (strText[endChar] != ' ')
+                {
+                    strncpy(strALine, strText + startChar, endChar - startChar + 1);
+                    startChar = endChar + 1;
+                }
+                else
+                {
+                    strncpy(strALine, strText + startChar, endChar - startChar);
+                    startChar = endChar + 1;
+                }
+            }
+            startChar = endChar +2;
+        }
+        //Output(strALine, numColumn);
+        //char strOutput[200] = { ' ' };
+        int numSubstractLen = 0, numSpace = 0, numlnsert = 0, numlnsert1 = 0;
+        int i = 0, j = 0;
+        for (i = 0; i < strlen(strALine); i++)
+        {
+            if (strALine[i] == ' ')
+                numSpace++;
+        }
+        numSubstractLen = numColumn - strlen(strALine);
+        numlnsert = numSubstractLen / numSpace;//平均每个空格处插入的空格数
+        numlnsert1 = numSubstractLen % numSpace;//
+        for (i = 0; i < strlen(strALine); i++)
+        {
+            if (' ' == strALine[i])
+            {
+                j = j + numlnsert ;
+                if (0 < numlnsert1)
+                {
+                    j++;
+                    numlnsert1--;
+                }
+            }
+            strOutput[j] = strALine[i];
+            j++;
+        }
+        strOutput[j] = '\0';
+        puts(strOutput);
+        printf("\n");
+    }
+    while (startChar < textLen);
+    return 0;
+}
+/*void TypeSetting(char strText[], char strALine[], int numColumn, int textLen, int *startChar, int *endChar)
+{
+    char strOutput[200] = { ' ' };
+    switch (strText[*endChar])
+    {
+    case ',':
+    case '.':
+    case '!':
+    {
+        strncpy(strALine,strText + *startChar, *endChar - *startChar + 1);
+        *startChar = *endChar + 1;
+        break;
+    }
+    case ' ':
+    {
+        strncpy(strALine, strText + *startChar, *endChar - *startChar);
+        *startChar = *endChar + 1;
+        break;
+    }
+    default:
+        getALine(strText, &(*startChar), &(*endChar));
+    }
+}
+void getALine(char strText[], int *startChar, int *endChar)
+{
+    char strALine[200] = { ' ' };
+    do
+    {
+        *endChar--;
+    }
+    while (strText[*endChar] == ',' && strText[*endChar] == '.' && strText[*endChar] == '!' && strText[*endChar] == ' ');
+    if (strText[*endChar] != ' ')
+    {
+        strncpy(strALine, strText + *startChar, *endChar - *startChar + 1);
+        *startChar = *endChar + 1;
+    }
+    else
+    {
+        strncpy(strALine, strText + *startChar, *endChar - *startChar);
+        *startChar = *endChar + 1;
+    }
+}
+void Output(char strALine[], int numColumn)
+{
+    char strOutput[200] = { ' ' };
+    int numSubstractLen = 0, numSpace = 0, numlnsert = 0, numlnsert1 = 0;
+    int i = 0, j = 0;
+    for (i = 0; i < strlen(strALine); i++)
+    {
+        if (strALine[i] == ' ')
+            numSpace++;
+    }
+    numSubstractLen = numColumn - strlen(strALine);
+    numlnsert = numSubstractLen / numSpace;//平均每个空格处插入的空格数
+    numlnsert1 = numSubstractLen % numSpace;//
+    for (i = 0; i < strlen(strALine); i++)
+    {
+        if (' ' == strALine[i])
+        {
+            j = j + numlnsert ;
+            if (0 < numlnsert1)
+            {
+                j++;
+                numlnsert1--;
+            }
+        }
+        strOutput[j] = strALine[i];
+        j++;
+    }
+    strOutput[j] = '\0';
+    puts(strOutput);
+    printf("\n");
+}
+*/

@@ -1,0 +1,18 @@
+#include<stdio.h>
+int main()
+{
+    int a =1;
+    float b=2.5;
+    char c='a';    
+    printf("a=%d,sizeof(a)=%d\n",a,sizeof(a));
+    printf("b=%f,sizeof(b)=%d\n",b,sizeof(b));
+    printf("c=%c,sizeof(c)=%d\n",c,sizeof(c));
+    printf("End of program");
+    return 0;
+}
+
+
+a=1,sizeof(a)=4
+b=2.500000,sizeof(b)=4
+c=a,sizeof(c)=1
+End of program
