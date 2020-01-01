@@ -1,39 +1,48 @@
 #include <stdio.h>
 #include <stdlib.h>
-int Prime (int n);
 int main()
 {
-    int i,ret;
-    int a,b;
-    for (i=2;i<1000;i++)
+    int i, a, b;
+    for (i = 2; i < 1000; i++)
     {
-        ret=Prime(i);
-        if (ret>=100)
+        if (prime(i))
         {
-            a=i/100;
-            b=i%10;
-            if(a==b)
-                printf("%d\n",ret);
+            if (i > 2 && i < 10)
+                printf("%d\n", i);
+            else
+            {
+                if (back(i))
+                    printf("%d\n", i);
+            }
         }
-        else if(ret>=10&&ret<=99)
-        {
-            a=i/10;
-            b=i%10;
-            if(a==b)
-                printf("%d\n",ret);
-        }
-        else if(ret>=2&&ret<=9)
-            printf("%d\n",ret);
-        else continue;
     }
 }
-int Prime (int n)
+int prime(int m)
 {
-    int j;
-    for(j=2;j<=sqrt(n);j++)
+    int i;
+    for (i = 2; i < m; i++)
     {
-        if(n%j==0)
+        if (m % i == 0)
             return 0;
     }
-    return n;
+    return 1;
+}
+int back(int m)
+{
+    int a, b;
+    if (m >= 10 && m <= 99)
+    {
+        a = m / 10;
+        b = m % 10;
+        if (a == b)
+            return 1;
+    }
+    else
+    {
+        a = m / 100;
+        b = m % 10;
+        if (a == b)
+            return 1;
+    }
+    return 0;
 }
